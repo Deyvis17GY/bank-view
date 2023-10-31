@@ -1,0 +1,40 @@
+@import '@/styles/variables';
+
+@mixin from($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin fromY($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin fromH($size) {
+  @media screen and (max-height: $size) {
+    @content;
+  }
+}
+
+@mixin fromYH($size) {
+  @media screen and (min-height: $size) {
+    @content;
+  }
+}
+
+@mixin centerStack(
+  $justify: center,
+  $align: center,
+  $isJustify: true,
+  $flow: column nowrap
+) {
+  display: flex;
+  flex-flow: $flow;
+  @if $isJustify {
+    justify-content: $justify;
+  }
+
+  align-items: $align;
+}
