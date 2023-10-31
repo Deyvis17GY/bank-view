@@ -1,0 +1,11 @@
+@import '@/styles/variables.scss';
+
+.a-button {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  color: $white;
+
+  &--primary {
+    background-color: $primary;
+  }
+}

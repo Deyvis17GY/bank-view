@@ -1,0 +1,41 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.a-input {
+  @include centerStack;
+  position: relative;
+
+  &__body {
+    padding: 1rem 0.5rem 1rem 3rem;
+    margin: 0 0 1.5rem 0;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+    }
+
+    &:focus {
+      box-shadow: 0 0 5px $primary;
+      border: 1px solid $primary;
+    }
+  }
+
+  &__errorMessage {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+
+  i {
+    position: absolute;
+    left: 20px;
+    bottom: 40px;
+  }
+}
