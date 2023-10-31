@@ -1,0 +1,66 @@
+@import '@/styles/variables.scss';
+@import '@/styles/mixins.scss';
+
+.o-login {
+  @include centerStack($flow: column);
+  width: 100%;
+  min-height: 85vh;
+  background-color: $primary;
+
+  &--blue,
+  &--green,
+  &--orange {
+    width: 100%;
+  }
+
+  &--blue {
+    height: 85%;
+    background-color: #2c348c;
+  }
+
+  &--orange {
+    height: 2%;
+    background-color: #f4c265;
+  }
+
+  &--green {
+    height: 13%;
+    background-color: #2c732c;
+  }
+
+  &__content {
+    @include centerStack($flow: column);
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    text-align: center;
+    margin: 0 auto;
+
+    @include fromY($large) {
+      max-width: 400px;
+    }
+  }
+
+  &__form {
+    margin: auto;
+    width: 100%;
+
+    @include fromY($large) {
+      width: 90%;
+    }
+  }
+
+  &__control {
+    margin: 1rem auto;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 0 0.3rem;
+
+    &__link {
+      color: $primary;
+      text-decoration: underline;
+    }
+  }
+}
