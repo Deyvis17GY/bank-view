@@ -1,19 +1,16 @@
 'use client'
-import { FormEvent } from 'react'
+
 import Link from 'next/link'
-import { shallow } from 'zustand/shallow'
-import { useLocalStore } from '@/zustand/useStore'
-import { userRegister } from '@/services/user/user'
-
-import { Button } from '../atoms/Button'
-
-import stylesLogin from '@/styles/components/organisms/login.module.scss'
-import { optimizedClasses } from '@/utils/generateClasses'
-import { Title } from '../atoms/Title'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { Input } from '../atoms/Input'
+import { userRegister } from '@/services/user/user'
 import { IRegisterUser } from '@/interfaces'
+import { optimizedClasses } from '@/utils/generateClasses'
+import { Title } from '@/components/atoms/Title'
+import { Input } from '@/components/atoms/Input'
+import { Button } from '@/components/atoms/Button'
+
+import stylesLogin from '@/styles/components/organisms/login.module.scss'
 
 export const RegisterContent = () => {
   const router = useRouter()
