@@ -2,6 +2,7 @@ import { TResponse } from '@/types'
 import axiosInstance from '../axiosInstance'
 import { endpoints } from '../endpoints'
 import { ILoginResponse } from '@/interfaces/services'
+import { ILoginUser, IRegisterUser } from '@/interfaces'
 
 export const userLogin = async ({
   user

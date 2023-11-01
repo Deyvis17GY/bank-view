@@ -6,7 +6,10 @@ axios.interceptors.request.use(
     const accessToken = getCookie('token')
 
     if (accessToken) {
-      if (config.headers) config.headers.Authorization = `Bearer ${accessToken}`
+      if (config.headers) {
+        // config.headers.Authorization = `Bearer ${accessToken}`
+        config.headers.Authorization = `Basic ${process.env.NEXT_PUBLIC_SECRET_KEY}`
+      }
     }
 
     return config
