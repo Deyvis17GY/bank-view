@@ -43,7 +43,7 @@ export const HomeContent = () => {
       try {
         const res = await postCreateBankLink({
           bank: data.name,
-          username: user?.firstName ?? 'Deyvis'
+          username: user?.firstName?.split(' ')?.[0] ?? 'Deyvis'
         })
         if (!res) return
         setBankLink(res)
