@@ -10,6 +10,7 @@ import { Card } from '@/components/molecules/Card'
 import { Spinner } from '@/components/atoms/Spinner'
 
 import styles from '@/styles/components/organisms/home.module.scss'
+import { Title } from '../atoms/Title'
 
 export const HomeContent = () => {
   const [listBanks, setListBanks] = useState<BankInfo[]>([])
@@ -65,13 +66,21 @@ export const HomeContent = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        listBanks.map((bank) => (
-          <Card
-            key={bank.id}
-            bank={bank}
-            onClick={() => onCreateBankLink(bank)}
+        <>
+          <Title
+            text='Selecciona un banco:'
+            className={classes('o-home__title')}
           />
-        ))
+          <div className={classes('o-home__container')}>
+            {listBanks.map((bank) => (
+              <Card
+                key={bank.id}
+                bank={bank}
+                onClick={() => onCreateBankLink(bank)}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   )
