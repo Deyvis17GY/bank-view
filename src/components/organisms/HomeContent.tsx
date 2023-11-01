@@ -67,10 +67,12 @@ export const HomeContent = () => {
         <Spinner />
       ) : (
         <>
-          <Title
-            text='Selecciona un banco:'
-            className={classes('o-home__title')}
-          />
+          {!isLoading && listBanks.length !== 0 && (
+            <Title
+              text='Selecciona un banco:'
+              className={classes('o-home__title')}
+            />
+          )}
           <div className={classes('o-home__container')}>
             {listBanks.map((bank) => (
               <Card
