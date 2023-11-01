@@ -23,7 +23,8 @@ export const RegisterContent = () => {
 
   const onSubmitRegister = async (data: IRegisterUser) => {
     try {
-      await userRegister(data)
+      const res = await userRegister(data)
+      if (res.statusCode !== 200) return
       router.push('/login')
     } catch (error) {
       console.error(error)
