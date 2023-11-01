@@ -1,33 +1,27 @@
 'use client'
-
-import { IListTransactionsResponse, ResultType } from '@/interfaces/services'
-import { useCallback, useEffect, useState } from 'react'
-import { Title } from '../atoms/Title'
-import { priceFormatter } from '@/utils/formatter'
-
-import styles from '@/styles/components/organisms/transaction.module.scss'
-import { optimizedClasses } from '@/utils/generateClasses'
-import { Card } from '../molecules/Card'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ITransactionsContent } from '@/interfaces/components/organisms'
 import { useLocalStore } from '@/zustand/useStore'
 import { shallow } from 'zustand/shallow'
-import { getListTransactions } from '@/services/bank/bank'
-import { useParams } from 'next/navigation'
+import { ResultType } from '@/interfaces/services'
+import { priceFormatter } from '@/utils/formatter'
+import { optimizedClasses } from '@/utils/generateClasses'
+import { Card } from '@/components/molecules/Card'
+import { Title } from '@/components/atoms/Title'
+import { Spinner } from '@/components/atoms/Spinner'
 
-export const TransactionsContent = () => {
+import styles from '@/styles/components/organisms/transaction.module.scss'
+
+export const TransactionsContent = ({ transactions }: ITransactionsContent) => {
   const [balance, setBalance] = useState(0)
   const [currency, setCurrency] = useState('COP')
+  const router = useRouter()
 
-  const params = useParams()
+  const { selectedBank } = useLocalStore((state) => state, shallow)
 
-  const { selectedBank, listTransactions } = useLocalStore(
-    (state) => state,
-    shallow
-  )
-
-  const totalInflows = listTransactions?.filter(
-    (t) => t.type === ResultType.Inflow
-  )
-  const totalOutflows = listTransactions?.filter(
+  const totalInflows = transactions?.filter((t) => t.type === ResultType.Inflow)
+  const totalOutflows = transactions?.filter(
     (t) => t.type === ResultType.Outflow
   )
 
@@ -48,11 +42,17 @@ export const TransactionsContent = () => {
     setCurrency(totalInflows?.[0]?.currency)
   }, [totalInflows, totalOutflows])
 
+  useEffect(() => {
+    if (transactions.length === 0) {
+      router.refresh()
+    }
+  }, [router, transactions])
+
   const classes = optimizedClasses(styles)
 
   return (
     <div className={classes('o-transaction')}>
-      {Array.isArray(listTransactions) && listTransactions.length ? (
+      {Array.isArray(transactions) && transactions.length ? (
         <>
           {selectedBank && <Card bank={selectedBank} />}
           <Title
@@ -73,7 +73,7 @@ export const TransactionsContent = () => {
               type='h2'
             />
             <ul className={classes('o-transaction__list')}>
-              {listTransactions.map((transaction) => (
+              {transactions.map((transaction) => (
                 <li
                   className={classes('o-transaction__list__item')}
                   key={transaction.id}
@@ -94,14 +94,13 @@ export const TransactionsContent = () => {
                 </li>
               ))}
             </ul>
+            <p className={classes('o-transaction__note')}>
+              Nota: son las primeras 20 transacciones
+            </p>
           </section>
         </>
       ) : (
-        <Title
-          className={classes('o-transaction__message')}
-          text={'Este Banco no cuenta con movimientos'}
-          type='h1'
-        />
+        <Spinner />
       )}
     </div>
   )
