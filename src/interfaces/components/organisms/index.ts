@@ -7,5 +7,5 @@ export interface ITransactionsProps {
 }
 
 export interface ITransactionsContent {
-  transactions: IListTransactionsResponse['results']
+  transactions: IListTransactionsResponse['results'] | []
 }

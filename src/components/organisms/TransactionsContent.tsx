@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ITransactionsContent } from '@/interfaces/components/organisms'
 import { useLocalStore } from '@/zustand/useStore'
@@ -21,8 +21,18 @@ export const TransactionsContent = ({ transactions }: ITransactionsContent) => {
 
   const { selectedBank } = useLocalStore((state) => state, shallow)
 
-  const totalInflows = transactions?.filter((t) => t.type === ResultType.Inflow)
-  const totalOutflows = transactions?.filter(
+  const orderTransactions = useMemo(() => {
+    const sortedTransactions = [...transactions]
+
+    return sortedTransactions.toSorted((a, b) => {
+      return a.value_date > b.value_date ? -1 : 1
+    })
+  }, [transactions])
+
+  const totalInflows = orderTransactions?.filter(
+    (t) => t.type === ResultType.Inflow
+  )
+  const totalOutflows = orderTransactions?.filter(
     (t) => t.type === ResultType.Outflow
   )
 
@@ -54,7 +64,7 @@ export const TransactionsContent = ({ transactions }: ITransactionsContent) => {
   return (
     <ProtectedRoute>
       <div className={classes('o-transaction')}>
-        {Array.isArray(transactions) && transactions.length ? (
+        {Array.isArray(orderTransactions) && orderTransactions.length ? (
           <>
             {selectedBank && <Card bank={selectedBank} />}
             <Title
@@ -75,7 +85,7 @@ export const TransactionsContent = ({ transactions }: ITransactionsContent) => {
                 type='h2'
               />
               <ul className={classes('o-transaction__list')}>
-                {transactions.map((transaction) => (
+                {orderTransactions.map((transaction) => (
                   <li
                     className={classes('o-transaction__list__item')}
                     key={transaction.id}
