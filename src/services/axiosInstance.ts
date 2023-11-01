@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
+import { toast } from 'sonner'
 
 axios.interceptors.request.use(
   async (config) => {
@@ -24,6 +25,7 @@ axios.interceptors.response.use(
     return response
   },
   (error) => {
+    toast.error(error?.message)
     console.error('Error', error)
     return Promise.reject(error)
   }

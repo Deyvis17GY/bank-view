@@ -5,6 +5,7 @@ import 'primeicons/primeicons.css'
 import './globals.scss'
 import '@/styles/normalize.scss'
 import { Header } from '@/components/templates/Header'
+import { Toaster } from 'sonner'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={nunito.className}>
         <Header />
+        <Toaster />
         <main className='main'>{children}</main>
       </body>
     </html>
