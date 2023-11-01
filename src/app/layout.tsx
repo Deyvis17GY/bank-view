@@ -23,6 +23,13 @@ export const metadata: Metadata = {
       name: 'Deyvis Mariños'
     }
   ],
+  icons: [
+    {
+      url: '/icons/favicon.ico',
+      rel: 'icon',
+      sizes: '192x192'
+    }
+  ],
   alternates: {
     canonical: '/'
   },
