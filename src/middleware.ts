@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from 'next/server'
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')
   const isLoginPage = request.nextUrl.pathname.startsWith('/login')
+  const isBankPage = request.nextUrl.pathname.startsWith('/bank')
 
-  if (!token && !isLoginPage) {
+  if (!token && !isLoginPage && !isBankPage) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
@@ -12,9 +13,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
+  if (!token && isBankPage) {
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/', '/login']
+  matcher: ['/', '/login', '/bank/:id/']
 }
