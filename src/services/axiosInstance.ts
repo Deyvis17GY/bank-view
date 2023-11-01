@@ -25,7 +25,8 @@ axios.interceptors.response.use(
     return response
   },
   (error) => {
-    toast.error(error?.message)
+    const responseMessage = error?.response?.data?.body?.message
+    toast.error(responseMessage ?? error?.message)
     console.error('Error', error)
     return Promise.reject(error)
   }
