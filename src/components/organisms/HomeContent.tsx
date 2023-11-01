@@ -1,14 +1,10 @@
 'use client'
-import { optimizedClasses } from '@/utils/generateClasses'
 import { useCallback, useEffect, useState } from 'react'
-import {
-  getListBankAccounts,
-  getListTransactions,
-  postCreateBankLink
-} from '@/services/bank/bank'
+import { useRouter } from 'next/navigation'
+import { optimizedClasses } from '@/utils/generateClasses'
+import { getListBankAccounts, postCreateBankLink } from '@/services/bank/bank'
 import { useLocalStore } from '@/zustand/useStore'
 import { shallow } from 'zustand/shallow'
-import { useRouter } from 'next/navigation'
 import { BankInfo } from '@/interfaces/services'
 import { Card } from '@/components/molecules/Card'
 import { Spinner } from '@/components/atoms/Spinner'
@@ -20,8 +16,10 @@ export const HomeContent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
-  const { user, setBankLink, setSelectedBank, setListTransactions } =
-    useLocalStore((state) => state, shallow)
+  const { user, setBankLink, setSelectedBank } = useLocalStore(
+    (state) => state,
+    shallow
+  )
 
   const classes = optimizedClasses(styles)
 
@@ -46,21 +44,16 @@ export const HomeContent = () => {
           bank: data.name,
           username: user?.firstName ?? 'Deyvis'
         })
-        if (!res.id) return
-
-        const transactions = await getListTransactions(res?.id)
-
+        if (!res) return
         setBankLink(res)
         setSelectedBank(data)
-        setListTransactions(transactions.results)
-        setTimeout(() => {
-          router.push(`bank/${res.id}`)
-        }, 6000)
+
+        router.push(`bank/${res.id}`)
       } catch (error) {
         console.error(error)
       }
     },
-    [router, setBankLink, setListTransactions, setSelectedBank, user?.firstName]
+    [router, setBankLink, setSelectedBank, user?.firstName]
   )
 
   useEffect(() => {
