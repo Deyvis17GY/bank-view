@@ -59,6 +59,7 @@ export const HomeContent = () => {
   )
 
   useEffect(() => {
+    if (!user?.token) return
     onGetListBanks()
   }, [])
 
