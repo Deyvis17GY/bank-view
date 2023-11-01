@@ -20,10 +20,8 @@ export const HomeContent = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const router = useRouter()
-  const { user, setBankLink, setSelectedBank } = useLocalStore(
-    (state) => state,
-    shallow
-  )
+  const { user, setBankLink, setSelectedBank, setListTransactions } =
+    useLocalStore((state) => state, shallow)
 
   const classes = optimizedClasses(styles)
 
@@ -48,15 +46,21 @@ export const HomeContent = () => {
           bank: data.name,
           username: user?.firstName ?? 'Deyvis'
         })
+        if (!res.id) return
+
+        const transactions = await getListTransactions(res?.id)
 
         setBankLink(res)
         setSelectedBank(data)
-        router.push(`bank/${res.id}`)
+        setListTransactions(transactions.results)
+        setTimeout(() => {
+          router.push(`bank/${res.id}`)
+        }, 6000)
       } catch (error) {
         console.error(error)
       }
     },
-    [router, setBankLink, setSelectedBank, user?.firstName]
+    [router, setBankLink, setListTransactions, setSelectedBank, user?.firstName]
   )
 
   useEffect(() => {

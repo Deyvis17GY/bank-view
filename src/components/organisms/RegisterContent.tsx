@@ -13,6 +13,7 @@ import { Title } from '../atoms/Title'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { Input } from '../atoms/Input'
+import { IRegisterUser } from '@/interfaces'
 
 export const RegisterContent = () => {
   const router = useRouter()
@@ -45,15 +46,17 @@ export const RegisterContent = () => {
             text='Hola'
             style={{
               fontWeight: 600,
-              fontSize: '1.25rem'
+              fontSize: '1.25rem',
+              color: '#fff'
             }}
           />
-          <p>Registra tus datos</p>
+          <p className={classes('o-login__subtitle')}>Registra tus datos</p>
           <div className={classes('o-login__control')}>
             <Input
               name='firstName'
               placeholder='Nombre'
               register={register}
+              iconName='pi-user'
               validation={{
                 pattern: {
                   value: /^[a-zA-Z]+$/,
@@ -68,6 +71,7 @@ export const RegisterContent = () => {
               name='lastName'
               placeholder='Apellido'
               register={register}
+              iconName='pi-user'
               validation={{
                 pattern: {
                   value: /^[a-zA-Z]+$/,
@@ -112,7 +116,7 @@ export const RegisterContent = () => {
             />
           </div>
           <div className={classes('o-login__control')}>
-            <Button text='Registrarse' type='submit' bg='primary' />
+            <Button text='Registrarse' type='submit' bg='secondary' />
           </div>
           <div className={classes('o-login__control')}>
             <p>

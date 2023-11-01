@@ -1,9 +1,14 @@
-interface ILoginUser {
+export interface ILoginUser {
   email: string
   password: string
 }
 
-interface IRegisterUser extends ILoginUser {
+export interface IRegisterUser extends ILoginUser {
   firstName: string
   lastName: string
+}
+
+export interface IParametersLink {
+  bank: string
+  username: string
 }

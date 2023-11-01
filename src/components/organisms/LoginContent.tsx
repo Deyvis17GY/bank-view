@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { setCookie } from 'cookies-next'
 import Link from 'next/link'
 import { userLogin } from '@/services/user/user'
+import { ILoginUser } from '@/interfaces'
 import { useLocalStore } from '@/zustand/useStore'
 import { optimizedClasses } from '@/utils/generateClasses'
 import { Title } from '@/components/atoms/Title'
@@ -54,10 +55,11 @@ export const LoginContent = () => {
             text='Hola'
             style={{
               fontWeight: 600,
-              fontSize: '1.25rem'
+              fontSize: '1.25rem',
+              color: '#fff'
             }}
           />
-          <p>Ingresa tus datos</p>
+          <p className={classes('o-login__subtitle')}>Ingresa tus datos</p>
           <div className={classes('o-login__control')}>
             <Input
               placeholder='Correo'
@@ -93,7 +95,7 @@ export const LoginContent = () => {
             />
           </div>
           <div className={classes('o-login__control')}>
-            <Button text='Ingresar' type='submit' bg='primary' />
+            <Button text='Ingresar' type='submit' bg='secondary' />
           </div>
           <div className={classes('o-login__control')}>
             <p>
