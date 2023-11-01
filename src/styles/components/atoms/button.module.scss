@@ -9,6 +9,10 @@
     background-color: $primary;
   }
 
+  &--secondary {
+    background-color: $secondary;
+  }
+
   &:active {
     transform: scale(1.1);
   }

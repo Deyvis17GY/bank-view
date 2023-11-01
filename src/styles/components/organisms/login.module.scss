@@ -4,8 +4,6 @@
 .o-login {
   @include centerStack($flow: column);
   width: 100%;
-  min-height: 85vh;
-  background-color: $primary;
 
   &--blue,
   &--green,
@@ -30,7 +28,7 @@
 
   &__content {
     @include centerStack($flow: column);
-    background-color: #ffffff;
+    background-color: #2ab7e6;
     padding: 2rem;
     border-radius: 0.5rem;
     width: 90%;
@@ -62,5 +60,9 @@
       color: $primary;
       text-decoration: underline;
     }
+  }
+
+  &__subtitle {
+    color: rgba(255, 255, 255, 0.849);
   }
 }
