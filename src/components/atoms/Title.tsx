@@ -3,7 +3,9 @@ import stylesTitle from '@/styles/components/atoms/title.module.scss'
 import dynamicStyles from 'clsx'
 
 export const Title = ({ text, className, type, ...props }: ITitleProps) => {
-  const titleClass = dynamicStyles(stylesTitle)
+  const titleClass = dynamicStyles(stylesTitle, {
+    [className ?? '']: className
+  })
 
   const conditionalTypes = () => {
     const renderTypes: Record<string, JSX.Element> = {

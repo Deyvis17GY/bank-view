@@ -8,4 +8,8 @@
   &--primary {
     background-color: $primary;
   }
+
+  &:active {
+    transform: scale(1.1);
+  }
 }
