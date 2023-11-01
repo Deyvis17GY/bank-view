@@ -7,6 +7,7 @@ import { shallow } from 'zustand/shallow'
 import { ResultType } from '@/interfaces/services'
 import { priceFormatter } from '@/utils/formatter'
 import { optimizedClasses } from '@/utils/generateClasses'
+import { ProtectedRoute } from '@/components/templates/ProtectedRoutes'
 import { Card } from '@/components/molecules/Card'
 import { Title } from '@/components/atoms/Title'
 import { Spinner } from '@/components/atoms/Spinner'
@@ -51,57 +52,59 @@ export const TransactionsContent = ({ transactions }: ITransactionsContent) => {
   const classes = optimizedClasses(styles)
 
   return (
-    <div className={classes('o-transaction')}>
-      {Array.isArray(transactions) && transactions.length ? (
-        <>
-          {selectedBank && <Card bank={selectedBank} />}
-          <Title
-            className={classes('o-transaction__title')}
-            text={`KPI (Balance): ${priceFormatter(
-              Math.round(balance),
-              currency
-            )}`}
-            type='h1'
-            style={{
-              color: selectedBank?.primary_color
-            }}
-          />
-          <section className={classes('o-transaction__section')}>
+    <ProtectedRoute>
+      <div className={classes('o-transaction')}>
+        {Array.isArray(transactions) && transactions.length ? (
+          <>
+            {selectedBank && <Card bank={selectedBank} />}
             <Title
-              className={classes('o-transaction__subtitle')}
-              text={'Movimientos:'}
-              type='h2'
+              className={classes('o-transaction__title')}
+              text={`KPI (Balance): ${priceFormatter(
+                Math.round(balance),
+                currency
+              )}`}
+              type='h1'
+              style={{
+                color: selectedBank?.primary_color
+              }}
             />
-            <ul className={classes('o-transaction__list')}>
-              {transactions.map((transaction) => (
-                <li
-                  className={classes('o-transaction__list__item')}
-                  key={transaction.id}
-                >
-                  {transaction.value_date.toString()}
-
-                  <span
-                    className={classes(
-                      `o-transaction--${
-                        transaction.type === ResultType.Outflow
-                          ? 'negative'
-                          : ''
-                      }`
-                    )}
+            <section className={classes('o-transaction__section')}>
+              <Title
+                className={classes('o-transaction__subtitle')}
+                text={'Movimientos:'}
+                type='h2'
+              />
+              <ul className={classes('o-transaction__list')}>
+                {transactions.map((transaction) => (
+                  <li
+                    className={classes('o-transaction__list__item')}
+                    key={transaction.id}
                   >
-                    {priceFormatter(transaction.amount, transaction.currency)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <p className={classes('o-transaction__note')}>
-              Nota: son las primeras 20 transacciones
-            </p>
-          </section>
-        </>
-      ) : (
-        <Spinner />
-      )}
-    </div>
+                    {transaction.value_date.toString()}
+
+                    <span
+                      className={classes(
+                        `o-transaction--${
+                          transaction.type === ResultType.Outflow
+                            ? 'negative'
+                            : ''
+                        }`
+                      )}
+                    >
+                      {priceFormatter(transaction.amount, transaction.currency)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className={classes('o-transaction__note')}>
+                Nota: son las primeras 20 transacciones
+              </p>
+            </section>
+          </>
+        ) : (
+          <Spinner />
+        )}
+      </div>
+    </ProtectedRoute>
   )
 }
