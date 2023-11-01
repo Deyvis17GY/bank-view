@@ -5,14 +5,15 @@ import { Title } from '@/components/atoms/Title'
 
 import styles from '@/styles/components/molecules/card.module.scss'
 
-export const Card = ({ bank, onClick }: ICardProps) => {
+export const Card = ({ bank, onClick, isLoading }: ICardProps) => {
   const classes = optimizedClasses(styles)
 
   return (
     <div
       className={classes('m-card')}
       style={{
-        backgroundColor: bank.primary_color
+        backgroundColor: bank.primary_color,
+        pointerEvents: isLoading ? 'none' : 'auto'
       }}
       key={bank.id}
       onClick={onClick}
@@ -31,6 +32,7 @@ export const Card = ({ bank, onClick }: ICardProps) => {
         type='h2'
         className={classes('m-card__name')}
       />
+      {isLoading && <p className={classes('m-card__loading')}>Cargando...</p>}
     </div>
   )
 }

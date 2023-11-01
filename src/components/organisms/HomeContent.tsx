@@ -16,9 +16,10 @@ import styles from '@/styles/components/organisms/home.module.scss'
 export const HomeContent = () => {
   const [listBanks, setListBanks] = useState<BankInfo[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoadingLink, setIsLoadingLink] = useState<boolean>(false)
 
   const router = useRouter()
-  const { user, setBankLink, setSelectedBank } = useLocalStore(
+  const { user, selectedBank, setBankLink, setSelectedBank } = useLocalStore(
     (state) => state,
     shallow
   )
@@ -42,17 +43,19 @@ export const HomeContent = () => {
   const onCreateBankLink = useCallback(
     async (data: BankInfo) => {
       try {
+        setIsLoadingLink(true)
+        setSelectedBank(data)
         const res = await postCreateBankLink({
           bank: data.name,
           username: user?.firstName?.split(' ')?.[0] ?? 'Deyvis'
         })
         if (!res) return
         setBankLink(res)
-        setSelectedBank(data)
-
         router.push(`bank/${res.id}`)
       } catch (error) {
         console.error(error)
+      } finally {
+        setIsLoadingLink(false)
       }
     },
     [router, setBankLink, setSelectedBank, user?.firstName]
@@ -82,6 +85,9 @@ export const HomeContent = () => {
                   key={bank.id}
                   bank={bank}
                   onClick={() => onCreateBankLink(bank)}
+                  isLoading={
+                    bank.id === selectedBank?.id ? isLoadingLink : false
+                  }
                 />
               ))}
             </div>

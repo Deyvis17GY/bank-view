@@ -22,4 +22,10 @@
     font-weight: 500;
     color: #fff;
   }
+
+  &__loading {
+    position: absolute;
+    bottom: 5px;
+    color: #ddd;
+  }
 }

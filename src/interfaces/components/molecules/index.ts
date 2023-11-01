@@ -4,4 +4,5 @@ export interface ICardProps {
   bank: BankInfo
   onClick?: () => void
   bgColor?: string
+  isLoading?: boolean
 }
