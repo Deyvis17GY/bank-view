@@ -32,10 +32,11 @@ export const Header = () => {
       <nav className={classes('t-header__nav')}>
         <ul className={classes('t-header__nav__list')}>
           <li>
-            <Link href='/'>
-              {user?.firstName ? `Hola ${user?.firstName}` : ''}
-            </Link>
+            <Link href='/' suppressHydrationWarning={true}>{`Hola ${
+              user?.firstName ? user?.firstName : ''
+            }`}</Link>
           </li>
+
           <li>
             <Link href='/' className={stylesLink('/')}>
               Inicio
@@ -47,6 +48,7 @@ export const Header = () => {
                 onClick={onLogout}
                 href={''}
                 className={stylesLink('/logout')}
+                suppressHydrationWarning={true}
               >
                 Cerrar sesión
               </Link>
