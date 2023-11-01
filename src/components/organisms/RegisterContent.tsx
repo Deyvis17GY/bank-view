@@ -44,7 +44,7 @@ export const RegisterContent = () => {
             style={{
               fontWeight: 600,
               fontSize: '1.25rem',
-              color: '#fff'
+              color: '#020202'
             }}
           />
           <p className={classes('o-login__subtitle')}>Registra tus datos</p>

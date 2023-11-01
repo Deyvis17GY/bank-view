@@ -28,12 +28,13 @@
 
   &__content {
     @include centerStack($flow: column);
-    background-color: #2ab7e6;
+    background-color: #fefcfc;
     padding: 2rem;
     border-radius: 0.5rem;
     width: 90%;
     text-align: center;
     margin: 0 auto;
+    box-shadow: 2px 5px 10px 1px rgba(0, 0, 0, 0.3);
 
     @include fromY($large) {
       max-width: 400px;
@@ -57,12 +58,16 @@
     padding: 0 0.3rem;
 
     &__link {
-      color: $primary;
+      color: $secondary;
       text-decoration: underline;
+    }
+
+    &__text {
+      color: $gray;
     }
   }
 
   &__subtitle {
-    color: rgba(255, 255, 255, 0.849);
+    color: $gray;
   }
 }

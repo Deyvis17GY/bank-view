@@ -56,7 +56,7 @@ export const LoginContent = () => {
             style={{
               fontWeight: 600,
               fontSize: '1.25rem',
-              color: '#fff'
+              color: '#020202'
             }}
           />
           <p className={classes('o-login__subtitle')}>Ingresa tus datos</p>
@@ -98,7 +98,7 @@ export const LoginContent = () => {
             <Button text='Ingresar' type='submit' bg='secondary' />
           </div>
           <div className={classes('o-login__control')}>
-            <p>
+            <p className={classes('o-login__control__text')}>
               ¿No tienes una cuenta?{' '}
               <Link
                 className={classes('o-login__control__link')}
