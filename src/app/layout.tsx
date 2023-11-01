@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 
 import 'primeicons/primeicons.css'
-import './globals.css'
+import './globals.scss'
 import '@/styles/normalize.scss'
+import { Header } from '@/components/templates/Header'
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -21,11 +22,6 @@ export const metadata: Metadata = {
       name: 'Deyvis Mariños'
     }
   ],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    viewportFit: 'cover'
-  },
   alternates: {
     canonical: '/'
   },
@@ -39,7 +35,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={nunito.className}>{children}</body>
+      <body className={nunito.className}>
+        <Header />
+        <main className='main'>{children}</main>
+      </body>
     </html>
   )
 }

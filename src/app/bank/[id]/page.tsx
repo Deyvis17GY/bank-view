@@ -5,18 +5,7 @@ import { IListTransactionsResponse } from '@/interfaces/services'
 import { TransactionsContent } from '@/components/organisms/TransactionsContent'
 
 const Transactions = async ({ params: { id } }: ITransactionsProps) => {
-  const response = await fetch(
-    `${endpoints.bank.GET_LIST_TRANSACTIONS}?&page=1&page_size=50&link=${id}`,
-    {
-      headers: {
-        Authorization: `Basic ${process.env.NEXT_PUBLIC_SECRET_KEY}`
-      }
-    }
-  )
-
-  const listTransactions: IListTransactionsResponse = await response.json()
-
-  return <TransactionsContent transactions={listTransactions?.results} />
+  return <TransactionsContent />
 }
 
 export default Transactions
