@@ -1,7 +1,13 @@
 {
   "name": "bank-view",
   "version": "0.1.0",
+  "author": "Deyvis17GY <deyvisjaime17@gmail.com>",
+  "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Deyvis17GY/bank-view.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
