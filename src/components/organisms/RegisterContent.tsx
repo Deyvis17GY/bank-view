@@ -126,9 +126,6 @@ export const RegisterContent = () => {
           </div>
         </form>
       </article>
-      <article className='bg-blue'></article>
-      <article className='bg-orange'></article>
-      <article className='bg-green'></article>
     </section>
   )
 }
