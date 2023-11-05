@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git@github.com:Deyvis17GY/bank-view.git"
+    "url": "https://github.com/Deyvis17GY/bank-view.git"
   },
   "scripts": {
     "dev": "next dev",
